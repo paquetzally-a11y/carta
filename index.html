@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+    radial-gradient(circle at top,#ff4d6d22,transparent 30%),
+    linear-gradient(180deg,#0a0f2c,#11193f,#1b0b2d);
+    color:white;
+    position:relative;
+}
+
+.estrellas{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-3;
+}
+
+.estrella{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:brillar 2s infinite alternate;
+}
+
+@keyframes brillar{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+.fondoCiudad{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    height:220px;
+    background:url('https://i.imgur.com/Tj9Y9Qx.png');
+    background-size:cover;
+    background-position:center;
+    opacity:0.25;
+    z-index:-2;
+}
+
+.telarañas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.telaraña1,
+.telaraña2{
+    position:absolute;
+    width:250px;
+    opacity:0.15;
+}
+
+.telaraña1{
+    top:-20px;
+    left:-20px;
+    transform:rotate(10deg);
+}
+
+.telaraña2{
+    top:-20px;
+    right:-20px;
+    transform:rotate(-10deg);
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+}
+
+.carta{
+    width:100%;
+    max-width:750px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:35px;
+    padding:40px;
+    box-shadow:0 0 40px rgba(255,0,85,0.2);
+    position:relative;
+    overflow:hidden;
+}
+
+.carta::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(45deg,transparent,rgba(255,255,255,0.05),transparent);
+    animation:shine 6s infinite linear;
+}
+
+@keyframes shine{
+    from{transform:translateX(-100%);}
+    to{transform:translateX(100%);}
+}
+
+.titulo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.titulo h1{
+    font-size:42px;
+    color:#ff4d6d;
+    text-shadow:0 0 15px rgba(255,77,109,0.5);
+}
+
+.titulo p{
+    color:#ddd;
+    margin-top:10px;
+}
+
+.spiderIcon{
+    font-size:50px;
+    animation:balanceo 3s infinite ease-in-out;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+@keyframes balanceo{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(12px);}
+    100%{transform:translateY(0px);}
+}
+
+.mensaje{
+    line-height:2;
+    font-size:17px;
+    color:#f2f2f2;
+}
+
+.destacado{
+    color:#ff8fab;
+    font-weight:600;
+}
+
+.galeria{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.galeria img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    transition:0.4s;
+    border:2px solid rgba(255,255,255,0.15);
+}
+
+.galeria img:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 25px rgba(255,77,109,0.5);
+}
+
+.botones{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:35px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(135deg,#ff4d6d,#c9184a);
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 20px rgba(255,77,109,0.3);
+}
+
+button:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+.oculto{
+    display:none;
+    margin-top:30px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    animation:fade 1s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+}
+
+.lista{
+    margin-top:15px;
+}
+
+.lista li{
+    margin:12px 0;
+    color:#f5d5dd;
+}
+
+.sorpresaContainer{
+    margin-top:35px;
+    text-align:center;
+}
+
+.finalSorpresa{
+    display:none;
+    margin-top:35px;
+    padding:35px;
+    border-radius:30px;
+    background:linear-gradient(135deg,rgba(255,77,109,0.15),rgba(255,255,255,0.05));
+    border:1px solid rgba(255,255,255,0.12);
+    text-align:center;
+    animation:fade 1s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.finalSorpresa h2{
+    color:#ff8fab;
+    margin-bottom:20px;
+    font-size:32px;
+}
+
+.finalSorpresa p{
+    line-height:2;
+    color:#f1f1f1;
+}
+
+.explosionCorazones{
+    margin-top:25px;
+    font-size:35px;
+    animation:latido 1s infinite alternate;
+}
+
+@keyframes latido{
+    from{transform:scale(1);}
+    to{transform:scale(1.15);}
+}
+
+.spidermanAnimado{
+    font-size:70px;
+    position:relative;
+    animation:bajar 4s infinite ease-in-out;
+    margin-bottom:15px;
+}
+
+.spidermanAnimado::before{
+    content:'';
+    position:absolute;
+    width:3px;
+    height:120px;
+    background:white;
+    top:-120px;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0.7;
+}
+
+@keyframes bajar{
+    0%{
+        transform:translateY(-40px);
+    }
+
+    50%{
+        transform:translateY(10px);
+    }
+
+    100%{
+        transform:translateY(-40px);
+    }
+}
+
+.contadorAmor{
+    margin-top:40px;
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.contadorAmor h2{
+    color:#ff8fab;
+    margin-bottom:15px;
+}
+
+.tiempo{
+    font-size:24px;
+    font-weight:700;
+    color:white;
+    line-height:1.7;
+}
+
+.cartitas{
+    margin-top:40px;
+}
+
+.cartitas h2{
+    text-align:center;
+    color:#ff8fab;
+    margin-bottom:20px;
+}
+
+.miniCartas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.miniCarta{
+    padding:25px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.08);
+    text-align:center;
+    transition:0.4s;
+    cursor:pointer;
+    backdrop-filter:blur(10px);
+}
+
+.miniCarta:hover{
+    transform:translateY(-8px) rotate(2deg);
+    box-shadow:0 0 25px rgba(255,77,109,0.35);
+}
+
+.mensajeLluvia{
+    position:fixed;
+    top:-50px;
+    color:#ffd6e0;
+    font-size:18px;
+    animation:caer 7s linear forwards;
+    pointer-events:none;
+    opacity:0.8;
+}
+
+@keyframes caer{
+    from{
+        transform:translateY(-50px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.final{
+    margin-top:40px;
+    text-align:center;
+    font-size:20px;
+    color:#ff8fab;
+}
+
+.corazon{
+    position:fixed;
+    color:#ff4d6d;
+    animation:subir linear forwards;
+    pointer-events:none;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(0) scale(0.8);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    to{
+        transform:translateY(-110vh) scale(1.5);
+        opacity:0;
+    }
+}
+
+.audio{
+    margin-top:30px;
+    text-align:center;
+}
+
+audio{
+    width:100%;
+    margin-top:10px;
+}
+
+@media(max-width:700px){
+    .carta{
+        padding:25px;
+    }
+
+    .titulo h1{
+        font-size:32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="estrellas"></div>
+<div class="fondoCiudad"></div>
+
+<div class="telarañas">
+    <img class="telaraña1" src="https://pngimg.com/d/spider_web_PNG12.png">
+    <img class="telaraña2" src="https://pngimg.com/d/spider_web_PNG12.png">
+</div>
+
+<div class="container">
+
+<div class="carta">
+
+<div class="titulo">
+    <div class="spiderIcon">🕷️</div>
+    <h1>Nuestra pequeña historia</h1>
+    <p>Hecha con muchísimo amor para ti ❤️</p>
+</div>
+
+<div class="mensaje">
+    Holaaaa amorcito 💌<br><br>
+
+    Quería hacerte algo especial porque sinceramente tú haces que mis días se sientan muchísimo más bonitos.
+    A veces siento que llegaste a mi vida como uno de esos momentos inesperados que terminan cambiándolo todo, para hacer de todo un poco mas bonito.
+
+    Me encanta hablar contigo, molestarte, reír contigo, hacer tonterías juntos y sentir que poco a poco estamos creando algo demasiado bonito y duradero.
+
+    Y sí… puse cositas de <span class="destacado">Spider-Man</span> porque me recuerdas muchísimo a él:
+    alguien fuerte, lindo, protector y demasiado especial para mí 🕷️❤️
+    
+    Ademas que desde que me dijiste que te gustaba, cada que veo algo de espiderman me acuerdo de ti, apareces en todos lados, y estas en todo lo que me 
+    dijiste que te gusta.
+</div>
+
+<div class="galeria">
+    <img src="https://i.pinimg.com/736x/5e/52/85/5e528577d92b8b5d35dbd4d1d8f5a26b.jpg">
+
+    <img src="https://i.pinimg.com/736x/ef/20/62/ef20623b3bd4b7477cb8d4afae7d8cf9.jpg">
+
+    <img src="https://i.pinimg.com/736x/e7/56/7d/e7567d9d7866994d06f7a7f32cfec7c4.jpg">
+</div>
+
+<div class="botones">
+    <button onclick="mostrar('mensaje1')">Abrir recuerdo 💭</button>
+    <button onclick="mostrar('mensaje2')">Lo que siento ❤️</button>
+    <button onclick="mostrar('mensaje3')">Mensaje secreto 🕸️</button>
+</div>
+
+<div class="oculto" id="mensaje1">
+    <h2>💭 Mi recuerdo favorito</h2>
+
+    <ul class="lista">
+        <li>Me acuerdo muchísimo de nuestras conversaciones random JSKSK.</li>
+        <li>De cómo poco a poco empezaste a volverte alguien demasiado importante.</li>
+        <li>De como incluso haces que los dias malos se sientan un poco mas suaves.</li>
+        <li>Tambien de la primera vez quee te dije "Te amo"</li>
+    </ul>
+</div>
+
+<div class="oculto" id="mensaje2">
+    <h2>❤️ Lo que siento por ti</h2>
+
+    <p>
+        Siento demasiadas cosas lindas contigo.
+        Me haces sentir querida, emocionada y feliz.
+        Y honestamente quiero seguir compartiendo momentos contigo,
+        creando recuerdos y haciendo muchas más cosas bonitas juntos 💖
+    </p>
+</div>
+
+<div class="oculto" id="mensaje3">
+    <h2>🕸️ Mensaje secreto</h2>
+
+    <p>
+        Si Spider-Man aprendió que las conexiones importantes nunca se rompen,
+        entonces espero que la nuestra tampoco lo haga jamás ❤️
+    </p>
+</div>
+
+<div class="audio">
+    <p>Puedes poner aquí una canción especial para ustedes 🎵</p>
+
+    <audio id="musiquita" controls>
+        <source src="musica.mp3">
+    </audio>
+
+    <button onclick="document.getElementById('musiquita').play()">
+        Reproducir música 💖
+    </button>
+</div>
+
+<div class="sorpresaContainer">
+    <button onclick="mostrarFinal()">NO PRESIONES ESTE BOTÓN 👀</button>
+</div>
+
+<div class="finalSorpresa" id="finalSorpresa">
+
+    <div class="spidermanAnimado">
+        🕷️
+    </div>
+
+    <h2>Final sorpresa ❤️</h2>
+
+    <p>
+        Si llegaste hasta aquí...
+        entonces quiero que sepas que realmente eres alguien demasiado importante para mí.
+        Gracias por llegar a mi vida y por hacer que cada momento contigo se sienta especial.
+        
+        Y sinceramente...
+        espero seguir creando muchísimos más recuerdos contigo 🥹❤️
+    </p>
+
+    <div class="explosionCorazones">
+        💖 💕 ❤️ 💗 💞
+    </div>
+
+</div>
+
+<div class="final">
+    Hecho con muchísimo amor solo para ti ❤️
+</div>
+
+<div class="contadorAmor">
+    <h2>⏳ Tiempo pensando en ti</h2>
+    <div class="tiempo" id="contador">
+        00 días 00 horas 00 minutos 00 segundos
+    </div>
+</div>
+
+<div class="cartitas">
+    <h2>💌 Cartitas rápidas para ti</h2>
+
+    <div class="miniCartas">
+        <div class="miniCarta">Me haces demasiado feliz ❤️</div>
+        <div class="miniCarta">Amo hablar contigo JSKSK 💕</div>
+        <div class="miniCarta">Contigo todo se siente bonito ✨</div>
+        <div class="miniCarta">Eres mi Spider-Man favorito 🕷️</div>
+    </div>
+</div>
+
+<div class="lluviaMensajes" id="lluviaMensajes"></div>
+
+</div>
+</div>
+
+<script>
+function mostrar(id){
+    const elemento = document.getElementById(id);
+
+    if(elemento.style.display === 'block'){
+        elemento.style.display = 'none';
+    }
+    else{
+        elemento.style.display = 'block';
+    }
+}
+
+function mostrarFinal(){
+    const final = document.getElementById('finalSorpresa');
+
+    if(final.style.display === 'block'){
+        final.style.display = 'none';
+    }
+    else{
+        final.style.display = 'block';
+
+        for(let i=0;i<25;i++){
+            setTimeout(()=>{
+                crearCorazon();
+            },i*120);
+        }
+    }
+}
+
+function crearCorazon(){
+    const corazon = document.createElement('div');
+    corazon.classList.add('corazon');
+    corazon.innerHTML = '❤️';
+
+    corazon.style.left = Math.random()*100 + 'vw';
+    corazon.style.fontSize = Math.random()*25 + 15 + 'px';
+    corazon.style.animationDuration = Math.random()*3 + 4 + 's';
+
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },7000);
+}
+
+setInterval(crearCorazon,250);
+
+const fechaInicio = new Date('2026-04-09T00:00:00');
+
+function actualizarContador(){
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    const minutos = Math.floor((diferencia / (1000*60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+
+    document.getElementById('contador').innerHTML =
+    dias + ' días ' +
+    horas + ' horas ' +
+    minutos + ' minutos ' +
+    segundos + ' segundos';
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
+
+const mensajes = [
+    'Te amo ❤️',
+    'Mi personita favorita 💕',
+    'Spider-Man y tú = perfección 🕷️',
+    'Gracias por existir ✨',
+    'Eres demasiado especial 🥹'
+];
+
+function lluviaMensajes(){
+    const mensaje = document.createElement('div');
+    mensaje.classList.add('mensajeLluvia');
+
+    mensaje.innerHTML = mensajes[Math.floor(Math.random()*mensajes.length)];
+
+    mensaje.style.left = Math.random()*100 + 'vw';
+    mensaje.style.fontSize = Math.random()*15 + 15 + 'px';
+
+    document.body.appendChild(mensaje);
+
+    setTimeout(()=>{
+        mensaje.remove();
+    },7000);
+}
+
+setInterval(lluviaMensajes,1800);
+
+for(let i=0;i<120;i++){
+    const estrella = document.createElement('div');
+    estrella.classList.add('estrella');
+
+    estrella.style.left = Math.random()*100 + 'vw';
+    estrella.style.top = Math.random()*100 + 'vh';
+    estrella.style.animationDuration = Math.random()*3 + 1 + 's';
+
+    document.querySelector('.estrellas').appendChild(estrella);
+}
+</script>
+
+</body>
+</html>
